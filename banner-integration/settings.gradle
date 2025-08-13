@@ -7,6 +7,8 @@ pluginManagement {
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+
+    // For Yieldlove SDK
     repositories {
         google()
         mavenCentral()
@@ -16,7 +18,11 @@ dependencyResolutionManagement {
                 includeGroup("com.yieldlove.adIntegration")
             }
         }
+    }
 
+    // For Confiant SDK
+    repositories {
+        // Confiant repository
         maven{
             url 'https://cdn.confiant-integrations.net/backend-integrations/in-app/releases/android/maven'
             content {
@@ -25,6 +31,7 @@ dependencyResolutionManagement {
         }
     }
 
+    // For Gravite SDK
     repositories {
         //... other repositories you use
         maven {
@@ -47,5 +54,5 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "Banner Integration"
+rootProject.name = "Stroeer SDK Ad Integration"
 include ':app'
