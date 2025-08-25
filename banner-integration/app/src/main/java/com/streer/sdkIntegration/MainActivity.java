@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.admanager.AdManagerAdRequest;
-import com.sourcepoint.cmplibrary.model.MessageLanguage;
 import com.stroeer.plugins.backfill.IInitializationCallback;
 import com.stroeer.plugins.backfill.gravite.GraviteLoader;
 import com.stroeer.plugins.monitoring.IAdMonitorCallback;
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 this,
                 R.id.main_activity_layout);
 
-        this.consent.collect(MessageLanguage.ENGLISH);
+        this.consent.collect();
 
         createBanner();
     }
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnPrivacyClick(View view) {
-        this.consent.showPrivacyManager(MessageLanguage.JAPANESE);
+        this.consent.showPrivacyManager();
     }
 
     public void btnReloadClick(View view){
@@ -172,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnConsentClick(View view) {
-        this.consent.collect(MessageLanguage.ENGLISH);
+        this.consent.collect();
     }
 
     public void btnRemoveConsentClick(View view) {
