@@ -1,5 +1,27 @@
 # Stroeer SDK – Ad Integration Examples for Android
 
+## 📖 **Integration Guide:**  
+For detailed instructions on integrating Stroeer SDK into your Android application, refer to the official documentation:  
+[Android Integration Documentation](https://stroeerdigitalgroup.atlassian.net/wiki/spaces/SDGPUBLIC/pages/1890648275/Android+integration+documentation)
+
+
+## Release Notes – v7.2.1
+**Release Date:** 2025-09-01
+
+
+## 🚀 New Features
+ 
+
+## 🛠 Improvements
+
+
+## 🐞 Bug Fixes
+- Fixed a memory leak in the Google SDK integration.
+- Fixed an issue where the SDK could freeze under certain conditions
+
+
+---
+
 ## Release Notes – v7.2.0
 **Release Date:** 2025-08-25
 
@@ -24,13 +46,6 @@
 - A minor memory leak related to the Google Mobile Ads SDK has been identified.
 Investigation is in progress, and a fix will be included in an upcoming release.
 ---
-
-📖 **Integration Guide:**  
-For detailed instructions on integrating Stroeer SDK into your Android application, refer to the official documentation:  
-[Android Integration Documentation](https://stroeerdigitalgroup.atlassian.net/wiki/spaces/SDGPUBLIC/pages/1890648275/Android+integration+documentation)
-
-
-
 
 ## Release Notes – v7.1.0
 **Release Date:** 2025-08-14
