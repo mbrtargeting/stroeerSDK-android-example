@@ -5,6 +5,21 @@ For detailed instructions on integrating Stroeer SDK into your Android applicati
 [Android Integration Documentation](https://stroeerdigitalgroup.atlassian.net/wiki/spaces/SDGPUBLIC/pages/1890648275/Android+integration+documentation)
 
 
+## Release Notes – v7.2.2
+**Release Date:** 2025-09-03
+
+
+## 🚀 New Features
+
+
+## 🛠 Improvements
+
+
+## 🐞 Bug Fixes
+- Fixed an issue where the application triggers an ANR (Android Not Responding) state when it crashed.
+
+---
+
 ## Release Notes – v7.2.1
 **Release Date:** 2025-09-01
 
