@@ -5,6 +5,18 @@ For detailed instructions on integrating Stroeer SDK into your Android applicati
 [Android Integration Documentation](https://stroeerdigitalgroup.atlassian.net/wiki/spaces/SDGPUBLIC/pages/1890648275/Android+integration+documentation)
 
 
+
+## Release Notes – v8.0.0 (29.Nov.2025)
+
+- Added new debug information.
+- Simplified the implementation for banner, interstitial, and rewarded formats.
+- Updated third-party libraries:
+    - CMP: 7.15.9
+    - Gravite: 3.14.3
+    - Confiant: 6.1.3
+    - Google Mobile Ads SDK: 24.6.0
+
+
 ## Release Notes – v7.2.2
 **Release Date:** 2025-09-03
 
