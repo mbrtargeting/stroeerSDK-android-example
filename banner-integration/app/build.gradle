@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-def sdkVersion = "7.2.2"
+def sdkVersion = "8.0.0"
 android {
     namespace "com.streer.sdkIntegration"
     compileSdk 35
@@ -47,7 +47,7 @@ dependencies {
 
     // if you need to have additional backfill support
     implementation "com.yieldlove.adIntegration:gravite:$sdkVersion"
-    implementation "com.intentsoftware.addapptr:AATKit:3.13.6"
+    implementation "com.intentsoftware.addapptr:AATKit:3.14.3"
 }
 
 

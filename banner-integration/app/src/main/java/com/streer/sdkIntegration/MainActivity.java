@@ -8,19 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.admanager.AdManagerAdRequest;
+import com.stroeer.ads.StroeerSDK;
+import com.stroeer.ads.exceptions.StroeerException;
+import com.stroeer.ads.formats.banner.StroeerBannerListener;
+import com.stroeer.ads.formats.banner.StroeerBannerView;
+import com.stroeer.ads.formats.interstitial.StroeerInterstitialListener;
+import com.stroeer.ads.formats.interstitial.StroeerInterstitialView;
+import com.stroeer.cmp.StroeerConsent;
 import com.stroeer.plugins.backfill.IInitializationCallback;
 import com.stroeer.plugins.backfill.gravite.GraviteLoader;
 import com.stroeer.plugins.monitoring.IAdMonitorCallback;
 import com.stroeer.plugins.monitoring.confiant.ConfiantLoader;
-import com.yieldlove.adIntegration.AdFormats.YieldloveBannerAd;
-import com.yieldlove.adIntegration.AdFormats.YieldloveBannerAdListener;
-import com.yieldlove.adIntegration.AdFormats.YieldloveBannerAdView;
-import com.yieldlove.adIntegration.AdFormats.YieldloveInterstitialAd;
-import com.yieldlove.adIntegration.AdFormats.YieldloveInterstitialAdListener;
-import com.yieldlove.adIntegration.AdFormats.YieldloveInterstitialAdView;
-import com.yieldlove.adIntegration.Yieldlove;
-import com.yieldlove.adIntegration.YieldloveConsent;
-import com.yieldlove.adIntegration.exceptions.YieldloveException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,9 +26,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    YieldloveConsent consent;
-    YieldloveBannerAd bannerAd;
-    YieldloveInterstitialAd interstitialAd;
+    StroeerConsent consent;
+    StroeerBannerView bannerAd;
+    StroeerInterstitialView interstitialAd;
 
     boolean isLoading = false; // As the reload button is used, we need to track if the ad is already loading to prevent multiple loads with a single instance. if you don't have reload button, you don't need this variable.
 
@@ -41,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initialize Yieldlove SDK
-        Yieldlove.setApplicationName(getApplicationContext(),"appDfpTestID5");
+        StroeerSDK.setApplicationName(getApplicationContext(),"appDfpTest");
         // Enable debug mode for Yieldlove SDK
         // This will provide additional logs for debugging purposes.
-        Yieldlove.enableDebugMode();
+        StroeerSDK.enableDebugMode();
+
+        // Enable Debug Panel
+        StroeerSDK.enableInspectionMode();
 
         boolean useConfiant = false;
         boolean useGravite = false;
@@ -87,11 +88,11 @@ public class MainActivity extends AppCompatActivity {
         map.put("userInterest", List.of("sports", "technology", "music")); // Example: User's interests
         map.put("userLocation", List.of("New York")); // Example: User's location
         // Apply the custom targeting globally for Gravite
-        Yieldlove.setCustomTargeting(map);
+        StroeerSDK.setCustomTargeting(map);
 
         // Initialize YieldloveConsent
         // If you have your own consent management system, you can skip this step.
-        this.consent = new YieldloveConsent(
+        this.consent = new StroeerConsent(
                 this,
                 R.id.main_activity_layout);
 
@@ -104,50 +105,46 @@ public class MainActivity extends AppCompatActivity {
         final ViewGroup adContainer = findViewById(R.id.generalAdContainer);
 
         try {
-            bannerAd = new YieldloveBannerAd(this);
+            bannerAd = new StroeerBannerView(this);
 
-            bannerAd.load("b1", new YieldloveBannerAdListener() {
-
+            //banner, banner2, banner3 can be used in the publisherSlotName
+            bannerAd.load("banner2", new StroeerBannerListener() {
                 @Override
-                public AdManagerAdRequest.Builder onAdRequestBuild() {
-                    return null;
-                }
-
-                @Override
-                public void onAdLoaded(YieldloveBannerAdView banner) {
-                    adContainer.removeAllViews();
-                    adContainer.addView(banner.getAdView());
+                public void onAdLoaded(StroeerBannerView banner) {
                     Toast.makeText(getApplicationContext(), "Ad loaded", Toast.LENGTH_SHORT).show();
                     isLoading = false;
                 }
 
                 @Override
-                public void onAdFailedToLoad(YieldloveBannerAdView yieldloveBannerAdView, YieldloveException e) {
+                public void onAdFailedToLoad(StroeerBannerView yieldloveBannerAdView, StroeerException e) {
                     Toast.makeText(getApplicationContext(), "Ad load failed", Toast.LENGTH_SHORT).show();
                     isLoading = false;
                 }
 
                 @Override
-                public void onAdOpened(YieldloveBannerAdView yieldloveBannerAdView) {
+                public void onAdOpened(StroeerBannerView yieldloveBannerAdView) {
                     Toast.makeText(getApplicationContext(), "Ad opened", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onAdClosed(YieldloveBannerAdView yieldloveBannerAdView) {
+                public void onAdClosed(StroeerBannerView yieldloveBannerAdView) {
                     Toast.makeText(getApplicationContext(), "Ad closed", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onAdClicked(YieldloveBannerAdView yieldloveBannerAdView) {
+                public void onAdClicked(StroeerBannerView yieldloveBannerAdView) {
                     Toast.makeText(getApplicationContext(), "Ad clicked", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
-                public void onAdImpression(YieldloveBannerAdView yieldloveBannerAdView) {
+                public void onAdImpression(StroeerBannerView yieldloveBannerAdView) {
                     Toast.makeText(getApplicationContext(), "Ad impression", Toast.LENGTH_SHORT).show();
                 }
             });
-        } catch (YieldloveException e) {
+
+            // this should be added
+            adContainer.addView(bannerAd);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -181,26 +178,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnInterstitialClick(View view) {
         try {
-            interstitialAd = new YieldloveInterstitialAd(this);
-            interstitialAd.load("int", new YieldloveInterstitialAdListener(){  // <-- put here your adslot name
-
+            interstitialAd = new StroeerInterstitialView(this);
+            interstitialAd.load("interstitial", new StroeerInterstitialListener(){  // <-- put here your adslot name
                 @Override
-                public AdManagerAdRequest.Builder onAdRequestBuild() {
-                    return null;
+                public void onAdLoaded() {
                 }
 
                 @Override
-                public void onAdLoaded(YieldloveInterstitialAdView interstitial) {
-                    interstitial.show();
-                }
-
-                @Override
-                public void onAdFailedToLoad(YieldloveInterstitialAdView interstitial, YieldloveException e) {
+                public void onAdFailedToLoad(StroeerException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Ad load failed", Toast.LENGTH_LONG).show();
                 }
             });
-        }catch (YieldloveException e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
