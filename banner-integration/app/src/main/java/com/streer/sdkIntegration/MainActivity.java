@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.admanager.AdManagerAdRequest;
 import com.stroeer.ads.StroeerSDK;
 import com.stroeer.ads.exceptions.StroeerException;
 import com.stroeer.ads.formats.banner.StroeerBannerListener;
@@ -20,6 +19,7 @@ import com.stroeer.plugins.backfill.gravite.GraviteLoader;
 import com.stroeer.plugins.monitoring.IAdMonitorCallback;
 import com.stroeer.plugins.monitoring.confiant.ConfiantLoader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,8 +87,13 @@ public class MainActivity extends AppCompatActivity {
         map.put("userAge", List.of("25")); // Example: User's age
         map.put("userInterest", List.of("sports", "technology", "music")); // Example: User's interests
         map.put("userLocation", List.of("New York")); // Example: User's location
+
         // Apply the custom targeting globally for Gravite
         StroeerSDK.setCustomTargeting(map);
+
+        ArrayList<String> data = new ArrayList<>();
+        data.add("test");data.add("1234");
+        StroeerSDK.setContextTargeting(data);
 
         // Initialize YieldloveConsent
         // If you have your own consent management system, you can skip this step.
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             bannerAd = new StroeerBannerView(this);
 
             //banner, banner2, banner3 can be used in the publisherSlotName
-            bannerAd.load("banner2", new StroeerBannerListener() {
+            bannerAd.load("banner", new StroeerBannerListener() {
                 @Override
                 public void onAdLoaded(StroeerBannerView banner) {
                     Toast.makeText(getApplicationContext(), "Ad loaded", Toast.LENGTH_SHORT).show();
@@ -214,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         destroyAd();
+        interstitialAd.destroy();
     }
 
     private void destroyAd(){

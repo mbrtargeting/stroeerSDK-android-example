@@ -4,12 +4,20 @@
 For detailed instructions on integrating Stroeer SDK into your Android application, refer to the official documentation:  
 [Android Integration Documentation](https://stroeerdigitalgroup.atlassian.net/wiki/spaces/SDGPUBLIC/pages/1890648275/Android+integration+documentation)
 
+## Release Notes - v8.0.1 (5.Jan.2025)
+## 🐞 Bug Fixes
+- Fixed the issue that the SDK may crash when the activity context is destroyed.
+## 🛠 Improvements
+- Removed the adex call.
+- Improved the performance of okhttpRequest.
 
 
 ## Release Notes – v8.0.0 (29.Nov.2025)
-
+## 🚀 New Features
 - Added new debug information.
-- Simplified the implementation for banner, interstitial, and rewarded formats.
+- Simplified the implementation for banner, interstitial, and rewarded formats. 
+- The class name is updated. (Yieldlove -> Stroeer). Please make sure to update your imports accordingly.
+## 🛠 Improvements
 - Updated third-party libraries:
     - CMP: 7.15.9
     - Gravite: 3.14.3
