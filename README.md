@@ -4,7 +4,19 @@
 For detailed instructions on integrating Stroeer SDK into your Android application, refer to the official documentation:  
 [Android Integration Documentation](https://stroeerdigitalgroup.atlassian.net/wiki/spaces/SDGPUBLIC/pages/1890648275/Android+integration+documentation)
 
-## Release Notes - v8.0.1 (5.Jan.2025)
+## Release Notes - v8.0.2 (5.Feb.2026)
+
+## 🐞 Bug Fixes
+-	Fixed an issue where configuration loading could fail permanently due to unstable or lost network connections.
+
+## 🛠 Improvements
+- Improved configuration download reliability by storing and reusing the last successfully downloaded configuration until a new one is available.
+- Added retry logic for configuration downloads when network failures occur.
+- Removed loading timeout to allow publisher-controlled banner loading
+- Added support for enabling inspection mode via adb shell setprop log.tag.StroeerSDK V
+
+
+## Release Notes - v8.0.1 (5.Jan.2026)
 ## 🐞 Bug Fixes
 - Fixed the issue that the SDK may crash when the activity context is destroyed.
 ## 🛠 Improvements

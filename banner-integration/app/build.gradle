@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 
-def sdkVersion = "8.0.1"
+def sdkVersion = "8.0.2"
 android {
     namespace "com.streer.sdkIntegration"
     compileSdk 35
